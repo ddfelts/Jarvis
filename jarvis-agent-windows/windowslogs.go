@@ -173,20 +173,3 @@ func getLevelString(level string) string {
 		return "Unknown"
 	}
 }
-
-func getSyslogPriority(level string) int {
-	switch level {
-	case "1":
-		return 2 // Critical severity
-	case "2":
-		return 3 // Error severity
-	case "3":
-		return 4 // Warning severity
-	case "4":
-		return 6 // Informational severity
-	case "5":
-		return 7 // Debug severity
-	default:
-		return 6 // Default to informational
-	}
-}
