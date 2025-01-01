@@ -1,0 +1,70 @@
+default:
+    syslog: False
+    api_url: "http://localhost:8080/api/v1/logs"
+    api_key: "1234567890"
+    cpu: True
+    memory: True
+    disk: True
+    network: True
+    service_monitor: False
+    windowslogs: True
+    filelogs: False
+    webapi: False
+
+syslog:
+    tag: "MachineName"
+    syslog_server: "remote_syslog_server:514"
+
+service_monitor:
+   sleeptime: 30
+   service:
+      - "wuauserv"     # Windows Update
+      - "RpcSs"        # Remote Procedure Call
+      - "EventLog"
+
+windowslogs:
+    forward: True
+    channels:
+       - Security
+       - Microsoft-Windows-PowerShell/Operational
+       - Microsoft-Windows-Windows Defender/Operational
+       - Application
+
+filelogs:
+  - /var/log/application.log
+  - /var/log/system.log
+  - /var/log/auth.log
+
+webapi:
+    - 
+      name: "qualys"
+      subject: "QualysAPI"
+      endpoint: "http://localhost:8080/api/v1/metrics"
+      method: "post"
+      headers:
+        - 
+            key: "Content-Type"
+            value: "application/json"
+          
+      auth_type: "apikey"
+      api_key: "1234567890"
+      skip_verify: True
+      timeout: 30
+      body:
+        - "metrics"
+
+plugins:
+  directory: "./plugins"
+  enabled:
+    - "servicemonitor"
+    - "apiclient"
+  config:
+    servicemonitor:
+      services:
+        - "Service1"
+        - "Service2"
+      sleeptime: 30
+    apiclient:
+      timeout: 30
+      skip_verify: true
+

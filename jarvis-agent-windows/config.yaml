@@ -1,0 +1,88 @@
+jarvisagent:
+    name: "jarvis-agent-windows"
+    id: "1234567890"
+
+apilogremote:
+    enabled: False
+    api_url: "http://localhost:8080/api/v1/logs"
+    #api_key: "1234567890"
+    #api_timeout: 30
+    #api_skip_verify: True
+    #api_auth_type: "apikey"
+    #api_username: "admin"
+    #api_password: "password"
+    api_method: "POST"
+    api_headers:
+        - 
+            key: "Content-Type"
+            value: "application/json"   
+    #api_body:
+    #    - "metrics"
+
+
+system_monitor:
+    enabled: True
+    apilogremote: True
+    sleeptime: 4
+    cpu: True
+    memory: True
+    disk: True
+    network: True
+    temperature: True
+    
+service_monitor:
+    enabled: False
+    apilogremote: True
+    sleeptime: 4
+    service:
+      - "wuauserv"     # Windows Update
+      - "RpcSs"        # Remote Procedure Call
+      - "EventLog"
+
+windowslogs:
+    enabled: False
+    apilogremote: True
+    channels:
+       - Security
+       - Microsoft-Windows-PowerShell/Operational
+       - Microsoft-Windows-Windows Defender/Operational
+       - Application
+
+webapi:
+    - 
+      enabled: False
+      name: "qualys"
+      subject: "QualysAPI"
+      endpoint: "http://localhost:8080/api/v1/metrics"
+      method: "post"
+      headers:
+        - 
+            key: "Content-Type"
+            value: "application/json"
+          
+      auth_type: "apikey"
+      api_key: "1234567890"
+      skip_verify: True
+      sleeptime: 30
+      timeout: 30
+      body:
+        - "metrics"
+
+web_monitor:
+    enabled: False
+    apilogremote: False
+    sleeptime: 30
+    timeout: 10
+    skip_verify: false
+    urls:
+        - "https://www.google.com"
+        - "https://www.github.com"
+
+syslog:
+    enabled: True
+    protocol: "tcp"  # udp, tcp, or tcp+tls
+    server: "localhost:514"
+    tag: "jarvis-agent"
+    skip_verify: false
+
+

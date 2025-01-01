@@ -1,0 +1,7 @@
+<service>
+  <id>jarvis-agent</id>
+  <name>jarvis-agent-windows</name>
+  <description>This service runs jarvis agent on windows systems.</description>
+  <executable>%BASE%\jarvis-agent-windows.exe</executable>
+  <log mode="roll"></log>
+</service>
