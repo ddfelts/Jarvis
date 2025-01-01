@@ -1,3 +1,7 @@
+/*
+The api_client.go file is a client for the API. It is used to send requests to the API and receive responses.
+*/
+
 package main
 
 import (
